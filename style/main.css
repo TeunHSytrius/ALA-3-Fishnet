@@ -1,0 +1,13 @@
+:root {
+    --black: black; 
+    --white: white;
+    --red: #f41313;
+ }
+ * {
+     font-family: Verdana sans-serif;
+     color: var(--white);
+ }
+ 
+ body {
+     background-color: var(--black);
+ }
