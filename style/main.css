@@ -11,3 +11,33 @@
  body {
      background-color: var(--black);
  }
+
+ /*Navbar styling*/
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    position: relative;
+    font-size: larger;
+    left: 1100px;
+    bottom: 120px;
+    width: fit-content;
+  }
+  
+  li {
+    float: left;
+  }
+  
+  li a {
+    display: block;
+    color: white;
+    text-align: center;
+    background-color: var(--red);
+    margin: 14px 16px;
+    border-radius: 5px;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+
+

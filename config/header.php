@@ -5,6 +5,6 @@
 <!--NavigationBar-->
 <nav>
     <ul>
-        <li><a href="login.php">Inloggen</a></li>
+        <li><a href="login/login.php">Inloggen</a></li>
     </ul>
 </nav>

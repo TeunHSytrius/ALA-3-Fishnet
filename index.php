@@ -4,7 +4,7 @@ include 'config/header.php';
 
 ?>
 
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -21,4 +21,4 @@ include 'config/header.php';
 
 </body>
 
-</html>
+</html> -->
