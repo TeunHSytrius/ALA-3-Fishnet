@@ -12,7 +12,7 @@
      background-color: var(--black);
  }
 
- /*Navbar styling*/
+ /*----------Navbar Styling-----------*/
 ul {
     list-style-type: none;
     margin: 0;
@@ -40,4 +40,35 @@ ul {
     text-decoration: none;
   }
 
+ /*----------Forms-----------*/
+  input {
+    color: black;
+  }
 
+  /*----------Login Form-----------*/
+  #form_login {
+    height: fit-content;
+    width: 30%;
+    background-color: black; 
+    padding: 5%; 
+    margin: 0 auto; 
+    box-sizing: border-box;
+    position: relative;
+    bottom: 150px;
+    left: 5%;
+}
+
+#form_login label{
+  color: white;
+}
+
+#form_login input {
+  display: block;
+}
+
+#btn_login {
+  position: relative;
+  margin: 10px;
+  padding: 5px;
+  left: 15%;
+}
