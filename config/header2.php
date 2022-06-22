@@ -4,6 +4,7 @@
 <!--NavigationBar-->
 <nav>
     <ul>
+        <li><a href="video.php">Video's</a></li>
         <li><a href="logout.php">Uitloggen</a></li>
         <li><a href="beheer.php">Beheer</a></li>
     </ul>

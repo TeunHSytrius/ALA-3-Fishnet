@@ -28,7 +28,7 @@ try {
             $count = $statement->rowCount();
             if ($count > 0) {
                 $_SESSION["username"] = $_POST["username"];
-                header("location:index.php");
+                header("location:main.php");
             } else {
                 $message = '<label style="color:red">Vul een geldig account in</label>';
             }
