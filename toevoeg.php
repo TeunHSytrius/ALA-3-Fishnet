@@ -5,45 +5,7 @@ require 'config/body.php';
 include_once 'config/conn.php';
 include_once 'config/header2.php';
 
-if (isset($_POST['btnSubmit'])) {
 
-    $image_name = $_FILES["image"]["name"];
-    $target_dir = "uploads/";
-
-    $target_file = $target_dir . basename($_FILES["image"]["name"]);
-
-    $RIKfilename = $_FILES["image"]["name"];
-    $RIKtempname = $_FILES["image"]["tmp_name"];
-    $folder = "uploads/" . $RIKfilename;
-
-
-
-
-    $uploadOk = 1;
-    $imageFileType = pathinfo($target_file, PATHINFO_EXTENSION);
-    //Check image real or fake
-    if (isset($_POST['btnSubmit'])) {
-        $check = getimagesize($_FILES["image"]["tmp_name"]);
-        $tempname = $_FILES["image"]["tmp_name"];
-        if ($check !== false) {
-            echo "";
-            $uploadOk = 1;
-        } else {
-            echo "<center>File is not an image.</center>";
-            $uploadOk = 0;
-        }
-    }
-    // Check if file already exists
-    if (file_exists($target_file)) {
-        echo "<center>Sorry, file already exists.</center>";
-        $uploadOk = 0;
-    }
-    // Check file size
-    if ($_FILES["image"]["size"] > 500000) {
-        echo "<center>Sorry, your file is too large.</center>";
-        $uploadOk = 0;
-    }
-}
 
 if (isset($_POST['btnSubmit'])) {
 
@@ -53,15 +15,16 @@ if (isset($_POST['btnSubmit'])) {
         $$key = $value;
 
 
-    $sql = " INSERT INTO movie (title, url, year, description)
-                VALUES (:title, :url, :year, :description )";
+    $sql = " INSERT INTO movie (title, url, year, description, cover)
+                VALUES (:title, :url, :year, :description, :cover)";
 
     $stmt = $conn->prepare($sql);
     $stmt->execute([
         ":title"            => $title,
         ":url"              => $url,
         ":year"             => $year,
-        ":description"      => $description
+        ":description"      => $description,
+        ":cover"            => $cover
     ]);
 
 
@@ -98,7 +61,7 @@ if (isset($_POST['btnSubmit'])) {
             <input type="text" name="url" class="form" required />
             <br />
             <label>Cover afbeelding: </label>
-            <input type="file" name="image" class="form" required />
+            <input type="text" name="cover" class="form" required />
             <br />
             <label>Jaar: </label>
             <input type="text" name="year" class="form" required />

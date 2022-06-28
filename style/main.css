@@ -11,7 +11,6 @@
  body {
      background-color: var(--black);
  }
-
  /*----------Navbar Styling-----------*/
 ul {
     list-style-type: none;
@@ -71,4 +70,57 @@ ul {
   margin: 10px;
   padding: 5px;
   left: 15%;
+}
+
+  /*----------Register Form-----------*/
+.rgstrform{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+
+}
+
+.rgstrform input{
+
+  
+  display:flex;
+  
+
+}
+.rgstrform textarea{
+
+  
+  display:flex;
+  
+
+}
+
+.rgstrform label{
+
+  
+  display:flex;
+  color: white;
+
+}
+
+.passform{
+
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  
+}
+
+.passform input{
+  display:flex;
+
+}
+
+.passform label{
+
+  color:white;
 }

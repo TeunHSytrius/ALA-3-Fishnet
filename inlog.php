@@ -1,69 +1,68 @@
 <?php
+include 'config/conn.php';
 include 'config/header.php';
 include 'config/body.php';
+
+//it will start the session 
 session_start();
-$servername = "localhost";
-$username = "root";
-$password = "";
+$username = "";
+if (isset($_POST["login"])) {
+    $melding = "";
+    $username = htmlspecialchars($_POST["username"]);
+    $password = htmlspecialchars($_POST["password"]);
+}
+
 
 try {
-    $conn = new PDO("mysql:host=$servername;dbname=netfish", $username, $password);
-    // set the PDO error mode to exception
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    // echo "Connected successfully";
+    //here it will select the username from the table user in the database 
+    $sql = "SELECT * FROM `user` WHERE `username` = :username ";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute(array(":username" => $username));
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
+    if ($result) {
+        $passwordDB = $result["password"];
 
-    if (isset($_POST["login"])) {
-        if (empty($_POST["username"]) || empty($_POST["password"])) {
-            $message = '<label style="color:red">Alle velden moeten ingevuld zijn</label>';
+        // it will check the password and compare it 
+        if (password_verify(@$password,  $passwordDB)) {
+
+            $_SESSION["id"] = session_id();
+            $_SESSION["USER_ID"] = $result["id"];
+            $_SESSION["username"] = $result["username"];
+            $_SESSION["is_admin"] = $result["is_admin"];
+
+            echo "<script>location.href='main.php';</script>";
         } else {
-            $query = "SELECT * FROM user WHERE username = :username AND password = :password";
-            $statement = $conn->prepare($query);
-            $statement->execute(
-                array(
-                    'username'     =>     $_POST["username"],
-                    'password'     =>     $_POST["password"]
-                )
-            );
-            $count = $statement->rowCount();
-            if ($count > 0) {
-                $_SESSION["username"] = $_POST["username"];
-                header("location:main.php");
-            } else {
-                $message = '<label style="color:red">Vul een geldig account in</label>';
-            }
+            echo "<br>Gebruikersnaam of wachtwoord is fout";
         }
     }
-} catch (PDOException $error) {
-    $message = $error->getMessage();
+} catch (PDOException $e) {
+    echo $e->getMessage();
 }
+
 ?>
-<!DOCTYPE html>
+
 <html>
 
 <head>
-    <title>NETFISH | Inloggen</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-
-    <div id="main" style="margin-top: 10%;">
-        <br />
-        <?php
-        if (isset($message)) {
-            echo '<label style="display:inline-block;" class="text-danger">' . $message . '</label>';
-        }
-        ?>
-        <form method="post" id="form_login">
-            <label>Gebruikersnaam</label>
-            <input type="text" name="username" class="options" />
-            <br />
-            <label>Wachtwoord</label>
-            <input type="password" name="password" class="options" />
-            <br />
-            <input type="submit" name="login" id="btn_login" value="Login">
+    <div id="form_login">
+        <!-- the form with information to be posted  -->
+        <form action="" method="POST">
+            <label>Gebruikersnaam:</label>
+            <input type="text" vlaue="username" name="username">
+            <label>Wachtwoord:</label>
+            <input type="password" vlaue="password" name="password">
+            <input style="cursor:pointer; width:4em;" type="submit" name="login" value="login">
 
         </form>
+        <div class="twobtns">
+            <a href="register.php"><button> Registreren </button></a>
+            <a href="forget.php"><button> Wachtwoord vergeten!</button></a>
+        </div>
     </div>
 </body>
 
